@@ -2,20 +2,19 @@ import dotenv from 'dotenv'
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors'
-import test from './schemas/frontend2.js';
+import test from './frontend2.js';
 import jwt from 'jsonwebtoken';
 dotenv.config();
 const PORT = process.env.PORT || 8080;
 const app = express();
 app.use(cors());
 app.use(express.json());
-const mongo_url = "mongodb://localhost:27017/test";
 // mongoose.connect(mongo_url);
-mongoose.connect(mongo_url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.mongo_url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected successfully'))
     .catch((err) => console.error('Database connection error:', err));
 app.listen(PORT, () => {
-    console.log('Server running on port ${PORT}');
+    console.log(`Server running on port ${PORT}`);
 });
 function authenticateToken(req, res, next) {
     const token = req.headers[authorization];
