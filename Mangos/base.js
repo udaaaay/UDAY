@@ -7,7 +7,10 @@ import jwt from 'jsonwebtoken';
 dotenv.config();
 const PORT = process.env.PORT || 8080;
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: 'https://uday-o0eg.onrender.com',
+    credentials: true,
+  }));
 app.use(express.json());
 // mongoose.connect(mongo_url);
 mongoose.connect(process.env.mongo_url, { useNewUrlParser: true, useUnifiedTopology: true })
